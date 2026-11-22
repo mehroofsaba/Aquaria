@@ -160,6 +160,7 @@ export class Aquarium {
     const { W, H } = this;
     this.rareSp = null;
     this.rareTimer = -1;
+    this.jellyVariantIndex = 0;
 
     for (const e of world.spawn) {
       const sp = SPECIES_BY_ID[e.id];
@@ -233,6 +234,18 @@ export class Aquarium {
     const kind = sp.kind;
     const ay = kind === "jelly" ? 0.3 : 0.5;
     s.anchor.set(0.5, ay);
+
+    if (kind === "jelly") {
+      const jellyColors = [
+        0x8ffff0, // Aqua
+        0xd7b8ff, // Lavender
+        0xffb3d6, // Blush pink
+      ];
+
+      s.tint = jellyColors[this.jellyVariantIndex % jellyColors.length];
+
+      this.jellyVariantIndex++;
+    }
     depth = depth ?? rand(0.8, 1.15);
     const c = {
       sp,
@@ -242,6 +255,7 @@ export class Aquarium {
       y,
       vx: 0,
       vy: 0,
+      sizeVariation: kind === "jelly" ? rand(0.72, 1.32) : 1,
       heading:
         Math.random() < 0.5 ? rand(-0.4, 0.4) : Math.PI + rand(-0.4, 0.4),
       speed: 0,
@@ -292,7 +306,7 @@ export class Aquarium {
   sizeCreature(c) {
     const S = this.reef.S,
       tex = c.s.texture;
-    const base = c.sp.size * SIZE_K * S * c.depth;
+    const base = c.sp.size * SIZE_K * S * c.depth * c.sizeVariation;
     c.k = c.kind === "seahorse" ? (base * 1.7) / tex.height : base / tex.width;
     c.cw = tex.width * c.k;
     c.ch = tex.height * c.k;
@@ -583,7 +597,11 @@ export class Aquarium {
         if (c.kind === "seahorse") {
           s.rotation = Math.sin(t * 1.1 + c.ph2) * 0.09 + c.vy * 0.0015;
         } else {
-          const tiltT = clamp(Math.atan2(c.vy, Math.abs(c.vx) + 20), -0.6, 0.6);
+          const tiltT = clamp(
+            Math.atan2(c.vy, Math.abs(c.vx) + 20),
+            -0.18,
+            0.18,
+          );
           c.tilt += (tiltT - c.tilt) * Math.min(1, dt * 5);
           s.rotation =
             c.tilt *
