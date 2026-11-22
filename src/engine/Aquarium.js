@@ -306,7 +306,17 @@ export class Aquarium {
   sizeCreature(c) {
     const S = this.reef.S,
       tex = c.s.texture;
-    const base = c.sp.size * SIZE_K * S * c.depth * c.sizeVariation;
+    const openScale =
+      this.world?.id === "open"
+        ? ({
+            whale: 0.52,
+            ray: 0.68,
+            jelly: 0.62,
+            fish: 0.82,
+          }[c.kind] ?? 1)
+        : 1;
+
+    const base = c.sp.size * SIZE_K * S * c.depth * c.sizeVariation * openScale;
     c.k = c.kind === "seahorse" ? (base * 1.7) / tex.height : base / tex.width;
     c.cw = tex.width * c.k;
     c.ch = tex.height * c.k;
