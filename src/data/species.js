@@ -1,0 +1,219 @@
+// Species catalogue — shared by every user, so it lives in the app, not the database.
+// `kind` decides which engine behaviour a species uses; `art` drives its procedural illustration.
+
+export const RARITY = {
+  common: { label: 'Common', color: '#B8E8D5', points: 50, weight: 60 },
+  uncommon: { label: 'Uncommon', color: '#B8DCEB', points: 100, weight: 26 },
+  rare: { label: 'Rare', color: '#B9B5E8', points: 250, weight: 11 },
+  legendary: { label: 'Legendary', color: '#F6D58A', points: 600, weight: 3 },
+};
+export const RARITY_ORDER = ['common', 'uncommon', 'rare', 'legendary'];
+
+export const SPECIES = [
+  // ───────── Coral Kingdom ─────────
+  {
+    id: 'clownfish', name: 'Clownfish', rarity: 'common', kind: 'fish',
+    habitat: 'Coral Kingdom · Anemone reefs',
+    blurb: 'Lives among anemone tentacles, protected by a mucus coat that shrugs off their sting.',
+    size: 62, speed: 52,
+    art: { shape: 'oval', body: '#FF7A2F', belly: '#FF9A55', fin: '#FF6A1A', stripe: 'bands', stripeColor: '#FFFFFF', accent: '#1B1B1B' },
+  },
+  {
+    id: 'yellow-tang', name: 'Yellow Tang', rarity: 'common', kind: 'fish',
+    habitat: 'Coral Kingdom · Shallow reef',
+    blurb: 'A sunny grazer that keeps algae in check and turns a deep gold at night.',
+    size: 70, speed: 58,
+    art: { shape: 'tang', body: '#F8D447', belly: '#FCE98A', fin: '#F2C41F', stripe: null },
+  },
+  {
+    id: 'blue-tang', name: 'Regal Blue Tang', rarity: 'uncommon', kind: 'fish',
+    habitat: 'Coral Kingdom · Reef slope',
+    blurb: 'Carries a folded scalpel at the base of its tail — a surgeonfish through and through.',
+    size: 74, speed: 62,
+    art: { shape: 'tang', body: '#2A5BE8', belly: '#4F86F7', fin: '#FFD23F', stripe: 'hstripe', stripeColor: '#0B1A5C' },
+  },
+  {
+    id: 'moorish-idol', name: 'Moorish Idol', rarity: 'uncommon', kind: 'fish',
+    habitat: 'Coral Kingdom · Outer reef',
+    blurb: 'Trails a long white dorsal streamer; notoriously hard to keep alive away from the reef.',
+    size: 82, speed: 46,
+    art: { shape: 'angel', body: '#F6F1DA', belly: '#FFFFFF', fin: '#F6D58A', stripe: 'vbars', stripeColor: '#1B1B1B', accent: '#F6D58A' },
+  },
+  {
+    id: 'pink-anthias', name: 'Pink Anthias', rarity: 'common', kind: 'fish', school: [7, 11],
+    habitat: 'Coral Kingdom · Reef wall',
+    blurb: 'Hovers in shimmering clouds above the coral, darting into cracks at the first shadow.',
+    size: 30, speed: 70,
+    art: { shape: 'slender', body: '#FF7FA8', belly: '#FFC1D6', fin: '#FF5C8E', stripe: null },
+  },
+  {
+    id: 'pufferfish', name: 'Porcupine Puffer', rarity: 'rare', kind: 'fish',
+    habitat: 'Coral Kingdom · Rocky ledges',
+    blurb: 'Gulps water to swell into a spiny ball when startled. Try tapping one.',
+    size: 70, speed: 34,
+    art: { shape: 'puffer', body: '#F4D08A', belly: '#FFF1CC', fin: '#E8B45A', stripe: 'spots', stripeColor: '#8A5A2B' },
+  },
+  {
+    id: 'seahorse', name: 'Seahorse', rarity: 'rare', kind: 'seahorse',
+    habitat: 'Coral Kingdom · Seagrass edges',
+    blurb: 'Male seahorses carry the eggs. Their tails curl around swaying plants to anchor them.',
+    size: 64, speed: 14,
+    art: { body: '#FFB347', belly: '#FFD98A', fin: '#FF8E83', accent: '#C65A2E' },
+  },
+  {
+    id: 'sea-turtle', name: 'Green Sea Turtle', rarity: 'rare', kind: 'turtle',
+    habitat: 'Coral Kingdom · Open lagoon',
+    blurb: 'Glides on slow, powerful flipper strokes and returns to the beach where it hatched.',
+    size: 190, speed: 26,
+    art: { body: '#6FA860', belly: '#E8D9A0', fin: '#7FB86E', accent: '#4A7C3F' },
+  },
+  {
+    id: 'moon-jelly', name: 'Moon Jelly', rarity: 'uncommon', kind: 'jelly',
+    habitat: 'Coral Kingdom · Open Ocean',
+    blurb: 'Pulses its translucent bell to drift on the current. Tap to send it upward.',
+    size: 120, speed: 18,
+    art: { body: '#F2B6E8', belly: '#FFFFFF', fin: '#C9B8FF' },
+  },
+  {
+    id: 'sea-anemone', name: 'Sea Anemone', rarity: 'common', kind: 'anemone',
+    habitat: 'Coral Kingdom · Reef floor',
+    blurb: 'A predator disguised as a flower. Touch it and it draws its tentacles in.',
+    size: 110, speed: 0,
+    art: { body: '#FF8E83', belly: '#FFD1C9', fin: '#C98CFF' },
+  },
+  {
+    id: 'pearl-oyster', name: 'Pearl Oyster', rarity: 'rare', kind: 'shell',
+    habitat: 'Coral Kingdom · Sandy bed',
+    blurb: 'Layer by layer, a speck of grit becomes a pearl. Open a shell to see.',
+    size: 90, speed: 0,
+    art: { body: '#B9B5E8', belly: '#F4F4EC', fin: '#8E88D6' },
+  },
+  {
+    id: 'sunburst', name: 'Sunburst Angelfish', rarity: 'legendary', kind: 'fish', points: 400,
+    habitat: 'Coral Kingdom · Sunlit shallows',
+    blurb: 'Said to appear only when the light hits the reef just right. Very few have been seen.',
+    size: 80, speed: 64,
+    art: { shape: 'angel', body: '#FFD65A', belly: '#FFF1A8', fin: '#FFB347', stripe: 'vbars', stripeColor: '#FF8E3C', accent: '#FFE9A0', glow: '#FFE08A' },
+  },
+
+  // ───────── Kelp Forest ─────────
+  {
+    id: 'garibaldi', name: 'Garibaldi', rarity: 'common', kind: 'fish',
+    habitat: 'Kelp Forest · Rocky reef',
+    blurb: 'A fiercely territorial orange damselfish that tends its own patch of algae garden.',
+    size: 68, speed: 48,
+    art: { shape: 'oval', body: '#FF7A00', belly: '#FF9C2E', fin: '#FF6A00', stripe: null },
+  },
+  {
+    id: 'silver-sardine', name: 'Silver Sardine', rarity: 'common', kind: 'fish', school: [12, 18],
+    habitat: 'Kelp Forest · Mid-water',
+    blurb: 'Thousands move as one body, flashing silver to confuse anything hungry.',
+    size: 30, speed: 92,
+    art: { shape: 'slender', body: '#9FC4D6', belly: '#E4F2F7', fin: '#7FA9BE', stripe: 'hstripe', stripeColor: '#4F7F99' },
+  },
+  {
+    id: 'kelp-bass', name: 'Kelp Bass', rarity: 'uncommon', kind: 'fish',
+    habitat: 'Kelp Forest · Canopy edge',
+    blurb: 'An ambush hunter that waits in the swaying fronds, camouflaged in olive and spots.',
+    size: 78, speed: 50,
+    art: { shape: 'oval', body: '#8DA35B', belly: '#D9DDA0', fin: '#6F8744', stripe: 'spots', stripeColor: '#46592A' },
+  },
+  {
+    id: 'sheephead', name: 'California Sheephead', rarity: 'uncommon', kind: 'fish',
+    habitat: 'Kelp Forest · Rocky bottom',
+    blurb: 'Crushes urchins and shells with strong teeth, and can change sex as it grows.',
+    size: 80, speed: 44,
+    art: { shape: 'oval', body: '#E8553A', belly: '#F59A82', fin: '#C93F2A', stripe: 'half', stripeColor: '#2A1B22' },
+  },
+  {
+    id: 'leafy-seadragon', name: 'Leafy Seadragon', rarity: 'rare', kind: 'seahorse',
+    habitat: 'Kelp Forest · Deep fronds',
+    blurb: 'Wears leaf-shaped ornaments of skin and drifts like a stray frond of kelp.',
+    size: 70, speed: 12,
+    art: { body: '#B7B34A', belly: '#E4DE8A', fin: '#7FB86E', accent: '#5E7A2C' },
+  },
+
+  // ───────── Seagrass Meadow ─────────
+  {
+    id: 'pipefish', name: 'Pipefish', rarity: 'common', kind: 'fish',
+    habitat: 'Seagrass Meadow · Blade thickets',
+    blurb: 'A seahorse cousin stretched out straight, perfectly disguised as a blade of grass.',
+    size: 64, speed: 34,
+    art: { shape: 'needle', body: '#B3A872', belly: '#D8D0A0', fin: '#9C9258', stripe: 'bands', stripeColor: '#6E6638', accent: '#6E6638' },
+  },
+  {
+    id: 'neon-goby', name: 'Neon Goby', rarity: 'common', kind: 'fish',
+    habitat: 'Seagrass Meadow · Sandy patches',
+    blurb: 'A tiny cleaner that sets up stations and picks parasites off larger fish.',
+    size: 34, speed: 46,
+    art: { shape: 'slender', body: '#1E2F4F', belly: '#2E4A7A', fin: '#2E4A7A', stripe: 'hstripe', stripeColor: '#4FE0FF' },
+  },
+  {
+    id: 'blue-damsel', name: 'Blue Damselfish', rarity: 'common', kind: 'fish', school: [5, 8],
+    habitat: 'Seagrass Meadow · Shallows',
+    blurb: 'Bright sapphire and always busy, shimmering in loose groups over the meadow.',
+    size: 38, speed: 60,
+    art: { shape: 'oval', body: '#2E8BFF', belly: '#7CC0FF', fin: '#1F6FE0', stripe: null },
+  },
+  {
+    id: 'sea-bream', name: 'Gilt-head Bream', rarity: 'uncommon', kind: 'fish', school: [3, 5],
+    habitat: 'Seagrass Meadow · Open sand',
+    blurb: 'Wears a golden crescent between its eyes and grazes along the grass beds.',
+    size: 66, speed: 50,
+    art: { shape: 'oval', body: '#C9D3D8', belly: '#F0F4F5', fin: '#A9B6BD', stripe: 'hstripe', stripeColor: '#8E9BA3', accent: '#F6D58A' },
+  },
+  {
+    id: 'dwarf-seahorse', name: 'Dwarf Seahorse', rarity: 'rare', kind: 'seahorse',
+    habitat: 'Seagrass Meadow · Grass blades',
+    blurb: 'No taller than a thumb, it holds on to a single blade and waits for plankton to pass.',
+    size: 46, speed: 10,
+    art: { body: '#C7A6F0', belly: '#E9D8FF', fin: '#B9B5E8', accent: '#8C6BC4' },
+  },
+
+  // ───────── Open Ocean ─────────
+  {
+    id: 'mahi-mahi', name: 'Mahi-Mahi', rarity: 'uncommon', kind: 'fish',
+    habitat: 'Open Ocean · Surface waters',
+    blurb: 'Shimmers electric green and gold and is one of the fastest fish in the sea.',
+    size: 104, speed: 96,
+    art: { shape: 'torpedo', body: '#4FD08A', belly: '#F6E08A', fin: '#2FA866', stripe: 'spots', stripeColor: '#2A7A5A' },
+  },
+  {
+    id: 'bluefin-tuna', name: 'Bluefin Tuna', rarity: 'rare', kind: 'fish', school: [3, 5],
+    habitat: 'Open Ocean · Deep currents',
+    blurb: 'Warm-blooded and built like a torpedo, crossing entire oceans in a single season.',
+    size: 120, speed: 110,
+    art: { shape: 'torpedo', body: '#2B4A8A', belly: '#C9D8EA', fin: '#F6D58A', stripe: null },
+  },
+  {
+    id: 'flying-fish', name: 'Flying Fish', rarity: 'uncommon', kind: 'fish', school: [6, 9],
+    habitat: 'Open Ocean · Surface waters',
+    blurb: 'Leaps clear of the waves and glides on wing-like fins to escape predators.',
+    size: 56, speed: 105,
+    art: { shape: 'slender', body: '#5FA0D8', belly: '#DDEEFA', fin: '#B8DCEB', stripe: null },
+  },
+  {
+    id: 'sunfish', name: 'Ocean Sunfish', rarity: 'rare', kind: 'fish',
+    habitat: 'Open Ocean · Twilight zone',
+    blurb: 'The heaviest bony fish alive. It basks on its side to warm up after deep dives.',
+    size: 150, speed: 22,
+    art: { shape: 'disc', body: '#9EB2C2', belly: '#D3DEE6', fin: '#8296A8', stripe: null },
+  },
+  {
+    id: 'manta-ray', name: 'Manta Ray', rarity: 'legendary', kind: 'ray',
+    habitat: 'Open Ocean · Blue water',
+    blurb: 'Soars on wings wider than a car, filtering plankton as it banks through the blue.',
+    size: 260, speed: 30,
+    art: { body: '#34536E', belly: '#E8F0F4', fin: '#2A4660' },
+  },
+  {
+    id: 'blue-whale', name: 'Blue Whale', rarity: 'legendary', kind: 'whale',
+    habitat: 'Open Ocean · Far horizon',
+    blurb: 'The largest animal ever to live. Its call can carry across an entire ocean basin.',
+    size: 560, speed: 14,
+    art: { body: '#4A6D8C', belly: '#A9C3D6', fin: '#3D5C78' },
+  },
+];
+
+export const SPECIES_BY_ID = Object.fromEntries(SPECIES.map((s) => [s.id, s]));
+export const speciesPoints = (s) => s.points ?? RARITY[s.rarity].points;
