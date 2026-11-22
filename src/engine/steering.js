@@ -9,27 +9,55 @@ export function angleDiff(a, b) {
 }
 
 // Cohesion / alignment / separation for one school member against the rest.
-export function schoolForces(c, members, sepR = 36) {
-  let n = 0, px = 0, py = 0, vx = 0, vy = 0, sx = 0, sy = 0;
+export function schoolForces(c, members, sepR = 52) {
+  let n = 0,
+    px = 0,
+    py = 0,
+    vx = 0,
+    vy = 0,
+    sx = 0,
+    sy = 0;
   for (const m of members) {
     if (m === c) continue;
-    n++; px += m.x; py += m.y; vx += m.vx; vy += m.vy;
-    const dx = c.x - m.x, dy = c.y - m.y, d2 = dx * dx + dy * dy;
+    n++;
+    px += m.x;
+    py += m.y;
+    vx += m.vx;
+    vy += m.vy;
+    const dx = c.x - m.x,
+      dy = c.y - m.y,
+      d2 = dx * dx + dy * dy;
     if (d2 < sepR * sepR && d2 > 0.01) {
-      const d = Math.sqrt(d2), k = 1 - d / sepR;
-      sx += (dx / d) * k; sy += (dy / d) * k;
+      const d = Math.sqrt(d2),
+        k = 1 - d / sepR;
+      sx += (dx / d) * k;
+      sy += (dy / d) * k;
     }
   }
   if (!n) return { cx: 0, cy: 0, ax: 0, ay: 0, sx: 0, sy: 0 };
-  px /= n; py /= n; vx /= n; vy /= n;
-  const dx = px - c.x, dy = py - c.y, dl = Math.hypot(dx, dy) || 1, vl = Math.hypot(vx, vy) || 1;
-  const pull = Math.min(1, dl / 120);
-  return { cx: (dx / dl) * pull, cy: (dy / dl) * pull, ax: vx / vl, ay: vy / vl, sx, sy };
+  px /= n;
+  py /= n;
+  vx /= n;
+  vy /= n;
+  const dx = px - c.x,
+    dy = py - c.y,
+    dl = Math.hypot(dx, dy) || 1,
+    vl = Math.hypot(vx, vy) || 1;
+  const pull = Math.min(0.45, dl / 220);
+  return {
+    cx: (dx / dl) * pull,
+    cy: (dy / dl) * pull,
+    ax: vx / vl,
+    ay: vy / vl,
+    sx,
+    sy,
+  };
 }
 
 // Soft push away from the edges of the swim box.
 export function wallForce(x, y, box) {
-  let fx = 0, fy = 0;
+  let fx = 0,
+    fy = 0;
   const m = box.margin;
   if (x < box.x0 + m) fx = (box.x0 + m - x) / m;
   else if (x > box.x1 - m) fx = -(x - (box.x1 - m)) / m;
