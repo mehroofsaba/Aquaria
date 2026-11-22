@@ -6,7 +6,6 @@ export const WORLDS = [
   {
     id: "coral",
     name: "Coral Kingdom",
-    tagline: "Sunlit reefs",
     unlockAt: 0,
     seed: 7,
     colors: {
@@ -38,15 +37,17 @@ export const WORLDS = [
     objects: { anemone: 3, shell: 2 },
     particles: 70,
     bubbles: 20,
+
     spawn: [
-      { id: "mahi-mahi", count: 1 },
-      { id: "bluefin-tuna", count: 1 },
-      { id: "flying-fish", count: 1 },
-      { id: "sunfish", count: 1 },
-      { id: "manta-ray", count: 1 },
-      { id: "moon-jelly", count: 3 },
-      { id: "blue-whale", count: 1 },
+      { id: "clownfish", count: 3 },
+      { id: "yellow-tang", count: 2 },
+      { id: "blue-tang", count: 1 },
+      { id: "moorish-idol", count: 1 },
+      { id: "pink-anthias", count: 1 },
+      { id: "pufferfish", count: 1 },
+      { id: "seahorse", count: 2 },
     ],
+
     frenzy: [
       "clownfish",
       "yellow-tang",
@@ -59,7 +60,6 @@ export const WORLDS = [
   {
     id: "kelp",
     name: "Kelp Forest",
-    tagline: "Swaying cathedral",
     unlockAt: 3,
     seed: 21,
     colors: {
@@ -103,7 +103,6 @@ export const WORLDS = [
   {
     id: "seagrass",
     name: "Seagrass Meadow",
-    tagline: "Calm shallows",
     unlockAt: 6,
     seed: 42,
     colors: {
@@ -145,7 +144,6 @@ export const WORLDS = [
   {
     id: "open",
     name: "Open Ocean",
-    tagline: "Into the blue",
     unlockAt: 10,
     seed: 99,
     colors: {
@@ -171,7 +169,7 @@ export const WORLDS = [
       { id: "flying-fish", count: 2 },
       { id: "sunfish", count: 1 },
       { id: "manta-ray", count: 1 },
-      { id: "moon-jelly", count: 4 },
+      { id: "moon-jelly", count: 3 },
       { id: "blue-whale", count: 1 },
     ],
     frenzy: ["mahi-mahi", "bluefin-tuna", "flying-fish", "sunfish"],
